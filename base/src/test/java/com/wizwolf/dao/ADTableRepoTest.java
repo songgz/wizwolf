@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 public class ADTableRepoTest {
     @Autowired
-    private ADTableRepo tableRepo;
+    private ADTableRepository tableRepo;
 
     @Test
     public void testSaveAndFindADTable() {

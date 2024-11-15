@@ -1,6 +1,6 @@
 package com.wizwolf.service;
 
-import com.wizwolf.dao.ADTableRepo;
+import com.wizwolf.dao.ADTableRepository;
 import com.wizwolf.entity.ADTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,10 @@ import java.util.Optional;
 
 @Service
 public class TableService {
-    private final ADTableRepo tableRepo;
+    private final ADTableRepository tableRepo;
 
     @Autowired
-    public TableService(ADTableRepo tableRepo) {
+    public TableService(ADTableRepository tableRepo) {
         this.tableRepo = tableRepo;
     }
 

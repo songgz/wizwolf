@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ADUserRepo extends JpaRepository<ADUser, Long>, JpaSpecificationExecutor<ADUser> {
+public interface ADUserRepository extends JpaRepository<ADUser, Long>, JpaSpecificationExecutor<ADUser> {
 
     @Query(nativeQuery = true, value ="SELECT * FROM ad_user WHERE isactive='Y' name=?1 ")
     Optional<ADUser> findUserByLoginName(String name);

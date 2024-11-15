@@ -4,8 +4,8 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.wizwolf.client.Application;
 import com.wizwolf.client.util.Language;
-import com.wizwolf.dao.ADMessageRepo;
-import com.wizwolf.dao.ADMessageTrlRepo;
+import com.wizwolf.dao.ADMessageRepository;
+import com.wizwolf.dao.ADMessageTrlRepository;
 import com.wizwolf.entity.ADMessage;
 import com.wizwolf.entity.ADMessageTrl;
 import org.slf4j.Logger;
@@ -33,11 +33,11 @@ public final class MsgService {
     Cache<String, Object> m_languages;
     private final EnvService envSrv;
     private final LanguageService langSrv;
-    private final ADMessageRepo messageRepo;
-    private final ADMessageTrlRepo messageTrlRepo;
+    private final ADMessageRepository messageRepo;
+    private final ADMessageTrlRepository messageTrlRepo;
 
     @Autowired
-    private MsgService(EnvService envSrv, LanguageService langSrv, ADMessageRepo messageRepo, ADMessageTrlRepo messageTrlRepo) {
+    private MsgService(EnvService envSrv, LanguageService langSrv, ADMessageRepository messageRepo, ADMessageTrlRepository messageTrlRepo) {
         this.envSrv = envSrv;
         this.langSrv = langSrv;
         this.messageRepo = messageRepo;

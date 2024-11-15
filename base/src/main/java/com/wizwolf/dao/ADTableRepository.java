@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface ADTableRepo extends JpaRepository<ADTable, Long>, JpaSpecificationExecutor<ADTable> {
+public interface ADTableRepository extends JpaRepository<ADTable, Long>, JpaSpecificationExecutor<ADTable> {
 
 }

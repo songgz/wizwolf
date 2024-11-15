@@ -1,11 +1,7 @@
 spring:
-  messages:
-    encoding: utf-8
-    basename: i18n/login,i18n/message
-
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: 'jdbc:postgresql://localhost:5432/adempiere'
+    url: ''
     username: wizwolf
     password: wizwolf
     hikari:
@@ -25,16 +21,23 @@ spring:
     jpa:
       repositories:
         enabled: true
-  cache:
-    type: caffeine
-    caffeine:
-      spec: maximumSize=1000, expireAfterAccess=10m, refreshAfterWrite=5m
 
   flyway:
     baseline-on-migrate: true
     baseline-version: 1
     locations: classpath:db/migration
 
+
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=1000, expireAfterAccess=10m, refreshAfterWrite=5m
+
+
+
+  messages:
+    encoding: utf-8
+    basename: i18n/login,i18n/message
 logging:
   level:
     root: INFO

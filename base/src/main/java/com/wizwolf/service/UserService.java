@@ -1,6 +1,6 @@
 package com.wizwolf.service;
 
-import com.wizwolf.dao.ADUserRepo;
+import com.wizwolf.dao.ADUserRepository;
 import com.wizwolf.entity.ADUser;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +11,10 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    private final ADUserRepo userRepo;
+    private final ADUserRepository userRepo;
 
     @Autowired
-    public UserService(ADUserRepo userRepo) {
+    public UserService(ADUserRepository userRepo) {
         this.userRepo = userRepo;
     }
 

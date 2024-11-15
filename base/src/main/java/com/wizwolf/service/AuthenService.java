@@ -1,9 +1,7 @@
 package com.wizwolf.service;
 
-import com.wizwolf.dao.ADUserRepo;
-import com.wizwolf.dao.ADRoleRepo;
-import com.wizwolf.entity.ADClient;
-import com.wizwolf.entity.ADRole;
+import com.wizwolf.dao.ADUserRepository;
+import com.wizwolf.dao.ADRoleRepository;
 import com.wizwolf.entity.ADUser;
 import com.wizwolf.util.KeyNamePair;
 import org.hibernate.Hibernate;
@@ -18,13 +16,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class AuthenService {
-    private final ADUserRepo userRepo;
-    private final ADRoleRepo roleRepo;
+    private final ADUserRepository userRepo;
+    private final ADRoleRepository roleRepo;
     private ADUser user = null;
     private boolean authenticated;
 
     @Autowired
-    public AuthenService(ADUserRepo userRepo, ADRoleRepo roleRepo) {
+    public AuthenService(ADUserRepository userRepo, ADRoleRepository roleRepo) {
         this.userRepo = userRepo;
         this.roleRepo = roleRepo;
     }

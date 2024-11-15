@@ -1,8 +1,7 @@
 package com.wizwolf.service;
 
-import com.wizwolf.dao.ADReferenceRepo;
+import com.wizwolf.dao.ADReferenceRepository;
 import com.wizwolf.entity.ADReference;
-import com.wizwolf.entity.ADTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +9,10 @@ import java.util.Optional;
 
 @Service
 public class ReferenceService {
-    private final ADReferenceRepo referenceRepo;
+    private final ADReferenceRepository referenceRepo;
 
     @Autowired
-    public ReferenceService(ADReferenceRepo referenceRepo) {
+    public ReferenceService(ADReferenceRepository referenceRepo) {
         this.referenceRepo = referenceRepo;
     }
 

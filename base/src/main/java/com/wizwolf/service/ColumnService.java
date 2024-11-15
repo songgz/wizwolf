@@ -1,6 +1,6 @@
 package com.wizwolf.service;
 
-import com.wizwolf.dao.ADColumnRepo;
+import com.wizwolf.dao.ADColumnRepository;
 import com.wizwolf.entity.ADReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,10 @@ import java.util.Optional;
 
 @Service
 public class ColumnService {
-    private final ADColumnRepo columnRepo;
+    private final ADColumnRepository columnRepo;
 
     @Autowired
-    public ColumnService(ADColumnRepo columnRepo) {
+    public ColumnService(ADColumnRepository columnRepo) {
         this.columnRepo = columnRepo;
     }
 

@@ -1,15 +1,15 @@
 package com.wizwolf.service;
 
-import com.wizwolf.dao.ADRoleRepo;
+import com.wizwolf.dao.ADRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RoleService {
-    private final ADRoleRepo roleRepo;
+    private final ADRoleRepository roleRepo;
 
     @Autowired
-    public RoleService(ADRoleRepo roleRepo) {
+    public RoleService(ADRoleRepository roleRepo) {
         this.roleRepo = roleRepo;
     }
 }
