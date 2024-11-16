@@ -43,4 +43,9 @@ public class ADRole {
     @JoinColumn(name = "ad_org_id")
     private ADOrg org;
 
+    public String toString()
+    {
+        return getName();
+    }
+
 }

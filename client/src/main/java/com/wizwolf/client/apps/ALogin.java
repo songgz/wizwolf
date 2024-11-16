@@ -5,10 +5,12 @@ import com.wizwolf.client.config.SpringUtils;
 import com.wizwolf.client.service.LanguageService;
 import com.wizwolf.client.service.WindowService;
 import com.wizwolf.client.swing.*;
+import com.wizwolf.entity.ADRole;
 import com.wizwolf.entity.ADUser;
 import com.wizwolf.service.AuthenService;
 import com.wizwolf.service.UserService;
 import com.wizwolf.client.service.EnvService;
+import com.wizwolf.util.KeyNamePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Optional;
+import java.util.Set;
 
 @Component
 public class ALogin extends JFrame implements ChangeListener {
@@ -74,6 +77,9 @@ public class ALogin extends JFrame implements ChangeListener {
     private CPanel southPanel = new CPanel();
     private BorderLayout southLayout = new BorderLayout();
     private StatusBar statusBar = new StatusBar();
+    private CPanel confirmPanel;
+    private CButton bCancel;
+    private CButton bOK;
     //private ConfirmPanel confirmPanel = new ConfirmPanel(true, false, false, false, false, false, false);
 
 
@@ -90,6 +96,7 @@ public class ALogin extends JFrame implements ChangeListener {
         //m_WindowNo = this.winSrv.createWindowNo(null);
         initConnectionPanel();
         initDefaultPanel();
+        initConfirmPanel();
         jbInit();
 
         //  Focus to OK
@@ -102,7 +109,10 @@ public class ALogin extends JFrame implements ChangeListener {
         //System.out.println(i.getMessage("Host"));
 
         southPanel.setLayout(southLayout);
+        southPanel.add(confirmPanel, BorderLayout.NORTH);
         southPanel.add(statusBar, BorderLayout.SOUTH);
+        //helpScollPane.getViewport().add(onlineHelp, null);
+        //confirmPanel.addActionListener(this);
 
         loginTabPane.add(connectionPanel, "conn");
         loginTabPane.add(defaultPanel, "Defaults");
@@ -114,19 +124,9 @@ public class ALogin extends JFrame implements ChangeListener {
 
         this.getContentPane().add(mainPanel);
 
-        CButton btnOk = new CButton("ok");
-        btnOk.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(loginTabPane.getSelectedIndex() == 0) {
-                    //login(connPanel.getUserName(), connPanel.getPassword());
-                }else{
+        //CButton btnOk = new CButton("ok");
 
-                }
-
-            }
-        });
-        this.getContentPane().add(btnOk, BorderLayout.SOUTH);
+        //this.getContentPane().add(btnOk, BorderLayout.SOUTH);
 
         this.setVisible(true);
 
@@ -200,16 +200,16 @@ public class ALogin extends JFrame implements ChangeListener {
     }
 
     public void initDefaultPanel() {
+        roleLabel.setText("Role");
+        roleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        roleLabel.setLabelFor(roleCombo);
+        //roleCombo.addActionListener((ActionListener) this);
+
         clientCombo.setName("clientCombo");
         clientLabel.setText("Client");
         clientLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         clientLabel.setLabelFor(clientCombo);
         //clientCombo.addActionListener((ActionListener) this);
-
-        roleLabel.setText("Role");
-        roleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        roleLabel.setLabelFor(roleCombo);
-        //roleCombo.addActionListener((ActionListener) this);
 
         orgCombo.setName("orgCombo");
         orgLabel.setText("Organization");
@@ -222,10 +222,10 @@ public class ALogin extends JFrame implements ChangeListener {
         warehouseLabel.setLabelFor(warehouseCombo);
 
         defaultPanel.setLayout(new GridBagLayout());
-        defaultPanel.add(clientLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(12, 12, 5, 5), 0, 0));
-        defaultPanel.add(clientCombo, new GridBagConstraints(1, 0, 1, 1, 1.0, 0.0,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(12, 0, 5, 12), 0, 0));
-        defaultPanel.add(roleLabel, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 12, 5, 5), 0, 0));
-        defaultPanel.add(roleCombo, new GridBagConstraints(1, 1, 1, 1, 1.0, 0.0,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(5, 0, 5, 12), 0, 0));
+        defaultPanel.add(roleLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(12, 12, 5, 5), 0, 0));
+        defaultPanel.add(roleCombo, new GridBagConstraints(1, 0, 1, 1, 1.0, 0.0,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(12, 0, 5, 12), 0, 0));
+        defaultPanel.add(clientLabel, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 12, 5, 5), 0, 0));
+        defaultPanel.add(clientCombo, new GridBagConstraints(1, 1, 1, 1, 1.0, 0.0,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(5, 0, 5, 12), 0, 0));
         defaultPanel.add(orgLabel, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 12, 5, 5), 0, 0));
         defaultPanel.add(orgCombo, new GridBagConstraints(1, 2, 1, 1, 1.0, 0.0,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 5, 12), 0, 0));
         defaultPanel.add(warehouseLabel, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 12, 5, 5), 0, 0));
@@ -239,14 +239,53 @@ public class ALogin extends JFrame implements ChangeListener {
         //
 
     }
+    
+    public void initConfirmPanel() {
+        this.confirmPanel = new CPanel();
+        this.confirmPanel.setLayout(new BorderLayout());
+        this.confirmPanel.setName("confirmPanel");
+
+        CPanel okCancel = new CPanel(new FlowLayout(FlowLayout.RIGHT));
+        okCancel.setOpaque(false);
+        //bCancel = createCancelButton(withText);
+        this.bCancel = new CButton("Cancel");
+        okCancel.add(bCancel);
+        //bOK = createOKButton(withText);
+        this.bOK = new CButton("OK");
+        bOK.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(loginTabPane.getSelectedIndex() == 0) {
+                    login(userTextField.getText(), String.valueOf(passwordField.getPassword()));
+                }else{
+
+                }
+
+            }
+        });
+        okCancel.add(bOK);
+        //setCancelVisible(withCancelButton);
+        this.confirmPanel.add(okCancel, BorderLayout.EAST);
+
+    }
 
 
     public void login(String name, String password) {
         Optional<ADUser> o = authenSrv.login(name, password);
         o.ifPresent(user -> {
-            //authenService.login(user);
             if (authenSrv.isAuthenticated()) {
                 loginTabPane.setSelectedIndex(1);
+                Set<ADRole> rs = user.getRoles();
+                rs.forEach(r -> {
+                    roleCombo.addItem(r);
+                });
+//                for (KeyNamePair kn : authenSrv.getRoles()) {
+//                    roleCombo.addItem(kn);
+//                }
+//                for(KeyNamePair kn : authenSrv.getClients(authenSrv.getRoles().get(0))) {
+//                    clientCombo.addItem(kn);
+//                }
+
             }
         });
     }

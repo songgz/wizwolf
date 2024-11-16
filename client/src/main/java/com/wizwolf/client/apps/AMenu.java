@@ -29,9 +29,9 @@ public final class AMenu extends CFrame implements ActionListener, PropertyChang
     public AMenu(WindowService win) {
         super();
         this.win = win;
-        Splash splash = Splash.getInstance();
+        //Splash splash = Splash.getInstance();
         m_WindowNo = this.win.createWindowNo(this);
-        initSystem (splash); //	login
+        //initSystem (splash); //	login
 
     }
 

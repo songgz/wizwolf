@@ -10,15 +10,15 @@ import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 @EnableCaching
-public class AppClient {
+public class ClientApp {
 
 
-    public AppClient() {
+    public ClientApp() {
         FlatLightLaf.setup();
     }
 
     public static void main(String[] args) {
-        SpringApplicationBuilder builder = new SpringApplicationBuilder(AppClient.class);
+        SpringApplicationBuilder builder = new SpringApplicationBuilder(ClientApp.class);
         ApplicationContext ctx = builder.headless(false).web(WebApplicationType.NONE).run(args);
 
         String[] beanNames = ctx.getBeanDefinitionNames();
