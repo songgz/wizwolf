@@ -12,7 +12,6 @@ import java.util.Locale;
 
 public class Language {
 
-
     private String name;
     private String language;  //Language (key)
     private Locale locale;

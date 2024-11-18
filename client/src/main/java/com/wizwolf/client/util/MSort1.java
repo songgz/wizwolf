@@ -16,7 +16,7 @@
  *****************************************************************************/
 package com.wizwolf.client.util;
 
-import com.wizwolf.util.NamePair;
+import com.wizwolf.util.NamePair1;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -48,8 +48,8 @@ public final class MSort1 implements Comparator, Serializable {
 			cmp1 = ((MSort1)o1).data;
 		}
 
-		if (cmp1 instanceof NamePair) {
-			cmp1 = ((NamePair)cmp1).getName();
+		if (cmp1 instanceof NamePair1) {
+			cmp1 = ((NamePair1)cmp1).getName();
 		}
 
 		Object cmp2 = o2;
@@ -57,8 +57,8 @@ public final class MSort1 implements Comparator, Serializable {
 			cmp2 = ((MSort1)o2).data;
 		}
 
-		if (cmp2 instanceof NamePair) {
-			cmp2 = ((NamePair)cmp2).getName();
+		if (cmp2 instanceof NamePair1) {
+			cmp2 = ((NamePair1)cmp2).getName();
 		}
 
 		if (cmp1 == null) {

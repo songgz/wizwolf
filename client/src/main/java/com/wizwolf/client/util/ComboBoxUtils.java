@@ -2,6 +2,7 @@ package com.wizwolf.client.util;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collection;
 import java.util.List;
 
 public class ComboBoxUtils {
@@ -23,7 +24,7 @@ public class ComboBoxUtils {
      * ComboBoxUtils.bindComboBox(comboBox, persons, "name");
      * </pre>
      */
-    public static <T> void bindComboBox(JComboBox<T> comboBox, List<T> data, String displayProperty) {
+    public static <T> void bindComboBox(JComboBox<T> comboBox, Collection<T> data, String displayProperty) {
         // 创建一个 DefaultComboBoxModel 并设置数据源
         DefaultComboBoxModel<T> model = new DefaultComboBoxModel<>();
         for (T item : data) {

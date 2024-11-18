@@ -1,5 +1,6 @@
 package com.wizwolf.entity;
 
+import com.wizwolf.converter.BooleanToCharConverter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -25,7 +26,9 @@ public class ADUser {
     private String password;
     private String salt;
 
-    private Character isactive;
+    @Convert(converter = BooleanToCharConverter.class)
+    @Column(name = "isactive")
+    private Boolean isActive;
     private LocalDateTime created;
     private Long createdby;
     private LocalDateTime updated;

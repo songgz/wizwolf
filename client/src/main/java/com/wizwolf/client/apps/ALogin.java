@@ -5,12 +5,14 @@ import com.wizwolf.client.config.SpringUtils;
 import com.wizwolf.client.service.LanguageService;
 import com.wizwolf.client.service.WindowService;
 import com.wizwolf.client.swing.*;
+import com.wizwolf.client.util.ComboBoxUtils;
+import com.wizwolf.entity.ADClient;
+import com.wizwolf.entity.ADOrg;
 import com.wizwolf.entity.ADRole;
 import com.wizwolf.entity.ADUser;
 import com.wizwolf.service.AuthenService;
 import com.wizwolf.service.UserService;
 import com.wizwolf.client.service.EnvService;
-import com.wizwolf.util.KeyNamePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -55,11 +58,11 @@ public class ALogin extends JFrame implements ChangeListener {
     private CPanel defaultPanel = new CPanel();
     private GridBagLayout defaultPanelLayout = new GridBagLayout();
     private CLabel roleLabel = new CLabel();
-    private CComboBox roleCombo = new CComboBox();
+    private JComboBox<ADRole> roleCombo = new JComboBox<>();
     private CLabel clientLabel = new CLabel();
-    private CComboBox clientCombo = new CComboBox();
+    private JComboBox<ADClient> clientCombo = new JComboBox<>();
     private CLabel orgLabel = new CLabel();
-    private CComboBox orgCombo = new CComboBox();
+    private final JComboBox<ADOrg> orgCombo = new JComboBox<>();
     private CLabel warehouseLabel = new CLabel();
     private CComboBox warehouseCombo = new CComboBox();
     private CLabel languageLabel = new CLabel();
@@ -88,6 +91,7 @@ public class ALogin extends JFrame implements ChangeListener {
     public ALogin(LanguageService langSrv) {
         super( "Login");
         this.setName("Login");
+        setSize(300, 200);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.langSrv = langSrv;
 
@@ -276,15 +280,22 @@ public class ALogin extends JFrame implements ChangeListener {
             if (authenSrv.isAuthenticated()) {
                 loginTabPane.setSelectedIndex(1);
                 Set<ADRole> rs = user.getRoles();
+                ComboBoxUtils.bindComboBox(roleCombo, rs, "name");
+                ADRole role = (ADRole) roleCombo.getSelectedItem();
+
+                Set<ADClient> clients = new HashSet<>();
+                Set<ADOrg> orgs = new HashSet<>();
                 rs.forEach(r -> {
-                    roleCombo.addItem(r);
+                    if (r.getClient().getIsActive()) {
+                        clients.add(r.getClient());
+                    }
+                    if (r.getOrg().getIsActive()) {
+                        orgs.add(r.getOrg());
+                    }
                 });
-//                for (KeyNamePair kn : authenSrv.getRoles()) {
-//                    roleCombo.addItem(kn);
-//                }
-//                for(KeyNamePair kn : authenSrv.getClients(authenSrv.getRoles().get(0))) {
-//                    clientCombo.addItem(kn);
-//                }
+                ComboBoxUtils.bindComboBox(clientCombo, clients, "name");
+                ComboBoxUtils.bindComboBox(orgCombo, orgs, "name");
+                System.out.println(role);
 
             }
         });

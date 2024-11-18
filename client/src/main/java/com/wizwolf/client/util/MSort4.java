@@ -46,11 +46,11 @@ import java.util.Comparator;
  *
  * @param <T> 泛型类型，表示需要排序的对象类型
  */
-public class MSort<T> {
+public class MSort4<T> {
     private Comparator<? super T> comparator;
     private boolean ascending;
 
-    public MSort(Comparator<? super T> comparator, boolean ascending) {
+    public MSort4(Comparator<? super T> comparator, boolean ascending) {
         this.comparator = comparator;
         this.ascending = ascending;
     }

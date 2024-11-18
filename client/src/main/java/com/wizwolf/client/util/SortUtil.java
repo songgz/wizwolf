@@ -85,7 +85,7 @@ public class SortUtil {
                 Field field = o1.getClass().getDeclaredField(fieldName);
                 field.setAccessible(true);
 
-                // 获取字段的值，并确保它是 Comparable 类型
+                // 获取字段的值
                 Object value1 = field.get(o1);
                 Object value2 = field.get(o2);
 

@@ -1,6 +1,6 @@
 package com.wizwolf.model;
 
-import com.wizwolf.util.ValueNamePair;
+import com.wizwolf.util.ValueNamePair1;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -57,16 +57,16 @@ public class MQuery implements Serializable {
     public static final String	BETWEEN = " BETWEEN ";
     public static final int		BETWEEN_INDEX = 8;
 
-    public static final ValueNamePair[]	OPERATORS = new ValueNamePair[] {
-            new ValueNamePair (EQUAL,			" = "),		//	0
-            new ValueNamePair (NOT_EQUAL,		" != "),
-            new ValueNamePair (LIKE,			" ~ "),
-            new ValueNamePair (NOT_LIKE,		" !~ "),
-            new ValueNamePair (GREATER,			" > "),
-            new ValueNamePair (GREATER_EQUAL,	" >= "),	//	5
-            new ValueNamePair (LESS,			" < "),
-            new ValueNamePair (LESS_EQUAL,		" <= "),
-            new ValueNamePair (BETWEEN,			" >-< ")	//	8
+    public static final ValueNamePair1[]	OPERATORS = new ValueNamePair1[] {
+            new ValueNamePair1(EQUAL,			" = "),		//	0
+            new ValueNamePair1(NOT_EQUAL,		" != "),
+            new ValueNamePair1(LIKE,			" ~ "),
+            new ValueNamePair1(NOT_LIKE,		" !~ "),
+            new ValueNamePair1(GREATER,			" > "),
+            new ValueNamePair1(GREATER_EQUAL,	" >= "),	//	5
+            new ValueNamePair1(LESS,			" < "),
+            new ValueNamePair1(LESS_EQUAL,		" <= "),
+            new ValueNamePair1(BETWEEN,			" >-< ")	//	8
     };
 
     /*************************************************************************/

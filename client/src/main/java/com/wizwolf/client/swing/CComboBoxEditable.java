@@ -16,7 +16,7 @@
  *****************************************************************************/
 package com.wizwolf.client.swing;
 
-import com.wizwolf.util.NamePair;
+import com.wizwolf.util.NamePair1;
 //import org.adempiere.exceptions.ValueChangeListener;
 //import org.adempiere.plaf.AdempierePLAF;
 //import org.compiere.model.GridField;
@@ -95,8 +95,8 @@ public class CComboBoxEditable extends JComboBox
 			if (item == null)
 				continue;
 			boolean found = false;
-			if (item instanceof NamePair)
-				found = ((NamePair)item).getID().equals(key);
+			if (item instanceof NamePair1)
+				found = ((NamePair1)item).getID().equals(key);
 			else
 				found = item.toString().equals(key);
 			if (found)

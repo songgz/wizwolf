@@ -17,80 +17,72 @@
 package com.wizwolf.util;
 
 /**
- *	(String) Value Name Pair
+ *	(Numeric) Key Name Pair
  *
  *  @author     Jorg Janke
- *  @version    $Id: ValueNamePair.java,v 1.2 2006/07/30 00:52:23 jjanke Exp $
+ *  @version    $Id: KeyNamePair.java,v 1.2 2006/07/30 00:52:23 jjanke Exp $
  */
-public final class ValueNamePair extends NamePair
+public final class KeyNamePair1 extends NamePair1
 {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8315081335749462163L;
+	private static final long serialVersionUID = 6347385376010388473L;
 	
-	public static final ValueNamePair EMPTY = new ValueNamePair("", "");
+	public static final KeyNamePair1 EMPTY = new KeyNamePair1((long) -1, "");
 
 	/**
-	 *	Construct KeyValue Pair
-	 *  @param value value
+	 *	Constructor KeyValue Pair -
+	 *  @param key Key (-1 is considered as null)
 	 *  @param name string representation
 	 */
-	public ValueNamePair(String value, String name)
+	public KeyNamePair1(Long key, String name)
 	{
 		super(name);
-		m_value = value;
-		if (m_value == null)
-			m_value = "";
-	}   //  ValueNamePair
+		m_key = key;
+	}   //  KeyNamePair
 
-	/** The Value       */
-	private String m_value = null;
+	/** The Key         */
+	private Long 	m_key = Long.valueOf(0);
 
 	/**
-	 *	Get Value
-	 *  @return Value
+	 *	Get Key
+	 *  @return key
 	 */
-	public String getValue()
+	public Long getKey()
 	{
-		return m_value;
-	}	//	getValue
+		return m_key;
+	}	//	getKey
 
 	/**
-	 *	Get ID
-	 *  @return Value
+	 *	Get ID (key as String)
+	 *
+	 *  @return String value of key or null if -1
 	 */
 	public String getID()
 	{
-		return m_value;
+		if (m_key == -1)
+			return null;
+		return String.valueOf(m_key);
 	}	//	getID
+
 
 	/**
 	 *	Equals
-	 *  @param obj Object
-	 *  @return true, if equal
+	 *  @param obj object
+	 *  @return true if equal
 	 */
 	public boolean equals(Object obj)
 	{
-		if (obj instanceof ValueNamePair)
+		if (obj instanceof KeyNamePair1)
 		{
-			ValueNamePair pp = (ValueNamePair)obj;
-			if (pp.getName() != null && pp.getValue() != null &&
-				pp.getName().equals(getName()) && pp.getValue().equals(m_value))
+			KeyNamePair1 pp = (KeyNamePair1)obj;
+			if (pp.getKey() == m_key
+				&& pp.getName() != null
+				&& pp.getName().equals(getName()))
 				return true;
 			return false;
 		}
 		return false;
-	}	//	equals
-
-	/**
-	 *  Return Hashcode of value
-	 *  @return hascode
-	 */
-	public int hashCode()
-	{
-		return m_value.hashCode();
-	}   //  hashCode
-
-}	//	KeyValuePair
-
+	}
+}

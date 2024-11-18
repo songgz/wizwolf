@@ -1,7 +1,6 @@
 package com.wizwolf.client.util;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -81,7 +80,7 @@ public class MSortTests {
         System.out.println(list);
 
         // 创建按年龄排序的 MSort 对象，采用比较器
-        MSort<YourObject> ageSort = new MSort<>(Comparator.comparingInt(YourObject::getAge), true);
+        MSort4<YourObject> ageSort = new MSort4<>(Comparator.comparingInt(YourObject::getAge), true);
         Collections.sort(list, ageSort.getComparator());
 
         // 输出按年龄排序后的列表
@@ -89,7 +88,7 @@ public class MSortTests {
         System.out.println(list);
 
         // 创建按名字排序的 MSort 对象
-        MSort<YourObject> nameSort = new MSort<>(Comparator.comparing(YourObject::getName), true);
+        MSort4<YourObject> nameSort = new MSort4<>(Comparator.comparing(YourObject::getName), true);
         Collections.sort(list, nameSort.getComparator());
 
         // 输出按名字排序后的列表

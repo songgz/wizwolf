@@ -1,5 +1,6 @@
 package com.wizwolf.entity;
 
+import com.wizwolf.converter.BooleanToCharConverter;
 import lombok.Data;
 import org.hibernate.annotations.Where;
 
@@ -20,7 +21,9 @@ public class ADClient {
     private Long id;
     private String name;
 
-    private Character isactive;
+    @Convert(converter = BooleanToCharConverter.class)
+    @Column(name = "isactive")
+    private Boolean isActive;
     private LocalDateTime created;
     private Long createdby;
     private LocalDateTime updated;

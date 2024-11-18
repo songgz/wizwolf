@@ -26,7 +26,7 @@ import java.util.Optional;
  *  @author     Jorg Janke
  *  @version    $Id: NamePair.java,v 1.3 2006/07/30 00:52:23 jjanke Exp $
  */
-public abstract class NamePair implements Comparator<Object>, Serializable, Comparable
+public abstract class NamePair1 implements Comparator<Object>, Serializable, Comparable
 {
 	/**
 	 * 
@@ -37,7 +37,7 @@ public abstract class NamePair implements Comparator<Object>, Serializable, Comp
 	 *  Protected Constructor
 	 *  @param   name    (Display) Name of the Pair
 	 */
-	protected NamePair(String name)
+	protected NamePair1(String name)
 	{
 		m_name = Optional.ofNullable(name).orElse("");
 	}
@@ -79,12 +79,12 @@ public abstract class NamePair implements Comparator<Object>, Serializable, Comp
 	 *  @param o2 Object 2
 	 *  @return compareTo value
 	 */
-	public int compare(NamePair o1, NamePair o2)
+	public int compare(NamePair1 o1, NamePair1 o2)
 	{
 //		String s1 = o1 == null ? "" : o1.toString();
 //		String s2 = o2 == null ? "" : o2.toString();
 //		return s1.compareTo (s2);    //  sort order ??
-		return Comparator.comparing(NamePair::toString, Comparator.nullsFirst(String::compareTo))
+		return Comparator.comparing(NamePair1::toString, Comparator.nullsFirst(String::compareTo))
 				.compare(o1, o2);
 	}
 
@@ -105,7 +105,7 @@ public abstract class NamePair implements Comparator<Object>, Serializable, Comp
 	 *  @return  a negative integer, zero, or a positive integer as this object
 	 *		is less than, equal to, or greater than the specified object.
 	 */
-	public int compareTo(NamePair o)
+	public int compareTo(NamePair1 o)
 	{
 		return compare (this, o);
 	}	//	compareTo

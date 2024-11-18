@@ -1,5 +1,6 @@
 package com.wizwolf.entity;
 
+import com.wizwolf.converter.BooleanToCharConverter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -28,7 +29,9 @@ public class ADRole {
     private Long id;
     private String name;
 
-    private Character isactive;
+    @Convert(converter = BooleanToCharConverter.class)
+    @Column(name = "isactive")
+    private Boolean isActive;
     private LocalDateTime created;
     private Long createdby;
     private LocalDateTime updated;
@@ -43,9 +46,6 @@ public class ADRole {
     @JoinColumn(name = "ad_org_id")
     private ADOrg org;
 
-    public String toString()
-    {
-        return getName();
-    }
+
 
 }

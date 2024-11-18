@@ -3,7 +3,7 @@ package com.wizwolf.service;
 import com.wizwolf.dao.ADUserRepository;
 import com.wizwolf.dao.ADRoleRepository;
 import com.wizwolf.entity.ADUser;
-import com.wizwolf.util.KeyNamePair;
+import com.wizwolf.util.KeyNamePair1;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class AuthenService {
         Optional<ADUser> userOptional = userRepo.findByName(name);
         if (userOptional.isPresent()) {
             this.user = userOptional.get();
-            if (user.getPassword().equals(password)) {
+            if (user.getPassword().equals(password) && user.getClient().getIsActive()) {
                 Hibernate.initialize(this.user.getRoles());
                 return Optional.of(this.user);
             }
@@ -42,25 +42,25 @@ public class AuthenService {
 
     public boolean isAuthenticated() {
         if (!this.authenticated) {
-            if (this.user.getRoles().size() > 0 && this.user.getClient() != null) {
+            if (!this.user.getRoles().isEmpty() && this.user.getClient().getIsActive()) {
                 this.authenticated = true;
             }
         }
         return this.authenticated;
     }
 
-    public List<KeyNamePair> getRoles() {
-        ArrayList<KeyNamePair> roles = new ArrayList<>();
+    public List<KeyNamePair1> getRoles() {
+        ArrayList<KeyNamePair1> roles = new ArrayList<>();
         this.user.getRoles().forEach(role -> {
-            roles.add(new KeyNamePair(role.getId(), role.getName()));
+            roles.add(new KeyNamePair1(role.getId(), role.getName()));
         });
         return roles;
     }
 
-    public List<KeyNamePair> getClients(KeyNamePair role) {
+    public List<KeyNamePair1> getClients(KeyNamePair1 role) {
         return roleRepo.findById(role.getKey())
                 .stream()
-                .map(role1 -> new KeyNamePair(role1.getClient().getId(), role1.getClient().getName()))
+                .map(role1 -> new KeyNamePair1(role1.getClient().getId(), role1.getClient().getName()))
                 .collect(Collectors.toList());
     }
 }
